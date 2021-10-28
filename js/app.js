@@ -60,7 +60,7 @@ export default class App {
         // this._refreshNotes();
       },
       onNoteEdit: (element) => {
-        resizeText(element);
+        // resizeText(element);
         const notes = NotesAPI.getAllNotes();
         const targetNote = notes.filter(
           (note) => note.id == element.dataset.noteId
@@ -84,21 +84,6 @@ export default class App {
         NotesAPI.saveNote(updatedNote);
       },
     };
-  }
-}
-
-const isOverflown = ({ clientHeight, scrollHeight }) =>
-  scrollHeight > clientHeight;
-
-function resizeText(element) {
-  let i = 20;
-  const minSize = 12;
-  if (!isOverflown(element)) {
-    element.style.fontSize = "20px";
-  }
-  while (isOverflown(element) && i > minSize) {
-    i -= 0.25;
-    element.style.fontSize = `${i}px`;
   }
 }
 

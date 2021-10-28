@@ -70,8 +70,10 @@ export default class NotesView {
     noteElements.forEach((element) => {
       if (element.dataset.noteId == note.id) {
         console.log(element.dataset.noteId);
+        resizeText(element);
         /* respond to input in contenteditable */
         element.addEventListener("input", () => {
+          resizeText(element);
           this.onNoteEdit(element);
         });
         /* scroll to top of note on blur event */
@@ -110,5 +112,20 @@ export default class NotesView {
     notes.forEach((note) => {
       this.addNoteElement(note);
     });
+  }
+}
+
+const isOverflown = ({ clientHeight, scrollHeight }) =>
+  scrollHeight > clientHeight;
+
+function resizeText(element) {
+  let i = 20;
+  const minSize = 12;
+  if (!isOverflown(element)) {
+    element.style.fontSize = "20px";
+  }
+  while (isOverflown(element) && i > minSize) {
+    i -= 0.25;
+    element.style.fontSize = `${i}px`;
   }
 }
