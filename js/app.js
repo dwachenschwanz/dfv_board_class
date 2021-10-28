@@ -1,7 +1,7 @@
 import NotesView from "./NotesView.js";
 import NotesAPI from "./NotesAPI.js";
 
-const noteColors = ["rgba(0,0,0,.3)", "#ECA2C4", "#A0D786", "#FFF9B2"];
+const noteColors = ["rgba(0,0,0,.3)", "#ECA2C4", "#FFF9B2", "#A0D786"];
 
 export default class App {
   constructor(root) {
@@ -13,10 +13,11 @@ export default class App {
     this.view.zones.forEach((container, index) => {
       container.addEventListener("dragover", (e) => {
         e.preventDefault();
-        const afterElement = getDragAfterElement(container, e.clientY);
+        const afterElement = getDragAfterElement(container, e.clientY, e);
+        // console.log("after:", afterElement);
         const draggable = document.querySelector(".dragging");
         draggable.style.backgroundColor = noteColors[index];
-
+        // console.log("dragging: ", draggable);
         // const updatedNote = {
         //   id: draggable.id,
         //   content: draggable.innerText,
@@ -24,7 +25,7 @@ export default class App {
         // };
         // NotesAPI.saveNote(updatedNote);
         // updateNote(draggable.id, draggable.innerText, index);
-        console.log(index);
+        // console.log(index);
         if (afterElement == null) {
           container.appendChild(draggable);
         } else {
@@ -87,15 +88,19 @@ export default class App {
   }
 }
 
-function getDragAfterElement(container, y) {
-  const draggableElements = [
-    ...container.querySelectorAll(".draggable:not(.dragging)"),
-  ];
-
+function getDragAfterElement(container, y, e) {
+  // const draggableElements = [
+  //   ...container.querySelectorAll(".draggable:not(.dragging)"),
+  // ];
+  const draggableElements = [...container.querySelectorAll(":not(.dragging)")];
+  // console.log("e", e);
+  // console.log("container", container.querySelectorAll(":not(.dragging)"));
+  // console.log("draggableElements:", draggableElements);
   return draggableElements.reduce(
     (closest, child) => {
       const box = child.getBoundingClientRect();
       const offset = y - box.top - box.height / 2;
+      console.log("offset:", offset, "y:", y);
       if (offset < 0 && offset > closest.offset) {
         return { offset: offset, element: child };
       } else {
