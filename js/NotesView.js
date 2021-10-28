@@ -1,4 +1,4 @@
-const noteColors = ["rgba(0,0,0,.3)", "#ECA2C4", "#A0D786", "#FFF9B2"];
+const noteColors = ["rgba(0,0,0,.3)", "#ECA2C4", "#FFF9B2", "#A0D786"];
 
 export default class NotesView {
   constructor(
@@ -15,7 +15,7 @@ export default class NotesView {
     this.root.innerHTML = `
       <div class="col-label">
         <button class="add-note" type="button">+</button>
-        <h4>Desirability</h4>
+        <span><h4>Desirability</h4></span>
         <h4>Feasibility</h4>
         <h4>Viability</h4>
       </div>

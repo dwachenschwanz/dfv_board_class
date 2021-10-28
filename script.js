@@ -1,5 +1,5 @@
 // console.log("In script.js");
-const noteColors = ["rgba(0,0,0,.3)", "#ECA2C4", "#A0D786", "#FFF9B2"];
+const noteColors = ["rgba(0,0,0,.3)", "#ECA2C4",  "#FFF9B2", "#A0D786"];
 
 const zones = document.querySelectorAll(".board > *");
 const addNoteButton = document.querySelector(".col-label > .add-note");
